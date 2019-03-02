@@ -1,0 +1,21 @@
+﻿body {
+}
+
+.cuadro{
+    border: 2px solid black;
+    width: 30%;
+    height: auto;
+    margin-left:33%;
+    margin-top: 10%;
+    padding:2%;
+}
+
+.cuadro input, label, h3, p,h2{
+        text-align: center;
+
+}
+h1{
+    text-align:center;
+}
+
+

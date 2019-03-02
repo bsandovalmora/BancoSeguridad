@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recuperar contraseña</title>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/recuperar.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div>
+            <form name="recuperar" method="post" action="/Home/Verificacion_codigo">
+                <fieldset>
+                    <legend style="font-size:x-large;">Recuperar contraseña</legend>
+
+                    <div class="pregunta">
+                        <h3>Por favor responda la siguiente pregunta</h3>
+                        <br />
+                        <p>@ViewData["pregunta"]</p>
+                        <input class="texto" type="text" name="respuesta" required="required" placeholder="Ingrese su respuesta" style="width:70%; margin-left:15%;" autocomplete="off"/>
+                        <br />
+                        <br />
+                        <input class="texto" type="submit" value="Siguiente" style="width: 50%;  margin-left:25%;" />
+                        <hr />
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    <a style="margin:2%; margin-top:3%;" href="">Probar otro método</a>
+                </fieldset>
+            </form>
+
+        </div>
+        <a style="margin-left:34%; margin-top:3%;" href="">Ayuda</a>
+        <a style="margin-left:25%; margin-top:3%;" href="/Home/Index">Volver</a>
+
+    </div>
+</body>
+</html>

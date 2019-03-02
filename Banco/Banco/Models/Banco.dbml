@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Banco" Class="BancoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-LEUPO3EJ\SQL_BRANDON;Initial Catalog=Banco;User ID=sa" SettingsObjectName="Banco.Properties.Settings" SettingsPropertyName="BancoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.cliente" Member="cliente">
+    <Type Name="cliente">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pregunta" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="respuesta" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="cliente_credenciales" Member="credenciales" ThisKey="id" OtherKey="id_cliente" Type="credenciales" />
+    </Type>
+  </Table>
+  <Table Name="dbo.credenciales" Member="credenciales">
+    <Type Name="credenciales">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_cliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usuario" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="pass" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Association Name="credenciales_usuarioXcodigo" Member="usuarioXcodigo" ThisKey="id" OtherKey="id_usuario" Type="usuarioXcodigo" />
+      <Association Name="cliente_credenciales" Member="cliente" ThisKey="id_cliente" OtherKey="id" Type="cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuarioXcodigo" Member="usuarioXcodigo">
+    <Type Name="usuarioXcodigo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_usuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="codigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="credenciales_usuarioXcodigo" Member="credenciales" ThisKey="id_usuario" OtherKey="id" Type="credenciales" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.buscar_credencial" Method="buscar_credencial">
+    <Parameter Name="usu" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.buscar_pregunta" Method="buscar_pregunta">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Parameter Name="pregunta" Type="System.String" DbType="VarChar(200)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.buscar_resp" Method="buscar_resp">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="respuesta" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.buscar_correo" Method="buscar_correo">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.insertar_codigo" Method="insertar_codigo">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="cod" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.buscar_codigo" Method="buscar_codigo">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="codigo" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.nueva_pass" Method="nueva_pass">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.registrar" Method="registrar">
+    <Parameter Name="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="cedula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="direccion" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="pregunta" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="respuesta" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

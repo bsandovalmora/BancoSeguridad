@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recuperar contraseña</title>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/recuperar.css">
+ 
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div>
+            <form name="recuperar" method="post" action="/Home/Codigo_Recuperacion">             
+                <fieldset>
+                    <legend style="font-size:x-large;">Recuperar contraseña</legend>
+                    <div class="ingresar">
+                        <hr />
+                        <br />
+                        <label style="margin-left:5%;" for="usu">Ingresar nombre de usuario</label>
+                        <input class="texto" type="text" name="usu" required="required" />
+                        <br />
+                        <br />
+                        <input style="margin-left:24%; width:50%;" class="texto" type="submit" value="Siguiente" />
+                    </div>
+                    <br />
+                    <br />
+                    <a style="margin:2%; margin-top:3%;" href="">Probar otro método</a>
+                </fieldset>
+            </form>
+
+        </div>
+        <a style="margin-left:34%; margin-top:3%;" href="">Ayuda</a>
+        <a style="margin-left:25%; margin-top:3%;" href="/Home/Index">Volver</a>
+
+    </div>
+</body>
+</html>

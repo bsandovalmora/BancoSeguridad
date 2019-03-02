@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Banco">
+  <DataContextMoniker Name="/BancoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="3b4d344e-1e05-497e-8ed1-ebb0234e1e44" absoluteBounds="0.75, 0.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/BancoDataContext/cliente" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d70fac9-ed48-4272-8fa1-0e37014fa6d0" absoluteBounds="0.76500000000000012, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d02675c0-0ace-4d34-8cfb-fc2cb7c6c16a" absoluteBounds="2.25, 4.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BancoDataContext/credenciales" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8ed437b-23b3-4f61-85d7-7323d7797d0f" absoluteBounds="2.265, 4.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 3.0401025390625); (2.5 : 4.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BancoDataContext/cliente/cliente_credenciales" />
+      <nodes>
+        <classShapeMoniker Id="3b4d344e-1e05-497e-8ed1-ebb0234e1e44" />
+        <classShapeMoniker Id="d02675c0-0ace-4d34-8cfb-fc2cb7c6c16a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ec2a33a4-582b-4215-9d49-98d471530cfa" absoluteBounds="4.5, 1.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/BancoDataContext/usuarioXcodigo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a6e1400d-3012-4e10-9752-2799d8967a37" absoluteBounds="4.515, 1.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.25 : 5.03929768880208); (5.5 : 5.03929768880208); (5.5 : 2.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BancoDataContext/credenciales/credenciales_usuarioXcodigo" />
+      <nodes>
+        <classShapeMoniker Id="d02675c0-0ace-4d34-8cfb-fc2cb7c6c16a" />
+        <classShapeMoniker Id="ec2a33a4-582b-4215-9d49-98d471530cfa" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

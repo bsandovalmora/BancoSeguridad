@@ -1,0 +1,24 @@
+﻿body {
+}
+
+fieldset {
+    width: 30%;
+    height: auto;
+    margin-left: 32%;
+    margin-top: 3%;
+    padding: 2%;
+    border-radius: 25px;
+}
+
+.texto {
+    border-radius: 10px;
+    margin-left: 21%;
+    width: 60%;
+    margin-bottom: 2%;
+}
+
+.button {
+    margin-left: 35%;
+    border-radius: 10px;
+    width: 30%;
+}

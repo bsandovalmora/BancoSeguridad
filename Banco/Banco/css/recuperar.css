@@ -1,0 +1,15 @@
+﻿body {
+}
+
+fieldset {
+    width: 30%;
+    height: auto;
+    margin-left: 33%;
+    margin-top: 10%;
+    padding: 2%;
+    border-radius:25px;
+}
+
+.texto{
+    border-radius:15px;
+}

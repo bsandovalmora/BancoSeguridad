@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restaurada</title>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/recuperar.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div>
+            <form name="recuperar" method="post" action="/Home/NuevaContra">
+                <fieldset>
+                    <legend style="font-size:x-large;">Nueva contraseña</legend>
+
+                    <div class="pregunta">
+                        <h3>Crear nueva contraseña</h3>
+                        <br />
+
+                        <input class="texto" type="password" name="pass" maxlength="12" required="required" placeholder="Ingrese su nueva contraseña" style="width:70%; margin-left:15%;" autocomplete="off"/>
+                        <br />
+                        <input class="texto" type="password" name="pass_1" maxlength="12" required="required" placeholder="Ingrese nuevamente la contraseña" style="width:70%; margin-left:15%;" autocomplete="off"/>
+                        <br />
+                        <input class="texto" type="submit" value="Crear" style="width: 50%;  margin-left:25%;" />
+                        <hr />
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                </fieldset>
+            </form>
+        </div>
+        <a style="margin-left:25%; margin-top:3%;" href="/Home/Index">Volver</a>
+
+    </div>
+</body>
+</html>
