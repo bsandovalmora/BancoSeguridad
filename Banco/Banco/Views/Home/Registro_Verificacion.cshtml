@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Registro_Verificacion</title>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/recuperar.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div>
+            <form name="recuperar" method="post" action="/Home/Registro_completado">
+                <fieldset>
+                    <legend style="font-size:x-large;">Verificación de código</legend>
+                    <div class="ingresar">
+                        <hr />
+                        <br />
+                        <label style="margin-left:5%;" for="usu">Ingresar código</label>
+                        <input class="texto" type="text" name="codigo" required="required" maxlength="8" autocomplete="off" />
+                        <br />
+                        <br />
+                        <input style="margin-left:24%; width:50%;" class="texto" type="submit" value="Verificar" />
+                    </div>
+                    <br />
+                    <br />
+
+                </fieldset>
+            </form>
+
+        </div>
+        <a style="margin-left:25%; margin-top:3%;" href="/Home/Index">Volver</a>
+
+    </div>
+</body>
+</html>

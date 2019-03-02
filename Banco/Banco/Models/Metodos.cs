@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Net.Mail;
+using System.IO;
 
 namespace Banco.Models
 {
@@ -108,6 +109,22 @@ namespace Banco.Models
             return mjs;
         }
 
+        public string Registrar(string nombre, string apellidos, string usuario, string cedula, string telefono, string direccion, string correo, string pregunta, string respuesta, string pass)
+        {
+            string mjs = "";
+
+            try
+            {
+                b.registrar(nombre, apellidos, usuario, Convert.ToInt32(cedula), Convert.ToInt32(telefono), direccion, correo, pregunta, respuesta, pass,ref mjs);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            return mjs;
+        }
+
         public string GenerarCodigo()
         {
             var guid = Guid.NewGuid();
@@ -130,26 +147,17 @@ namespace Banco.Models
             }
         }
 
-        public void EnviarCorreo(string usuario)
+        public void EnviarCorreo(string usuario, string asunto, string cuerpo)
         {
+    
+            string correo = Correo(usuario);  
 
-            string codigo = GenerarCodigo();
-            string correo = Correo(usuario);
-
-            InsertarCodigo(codigo,usuario);
-           
             MailMessage msg = new MailMessage();
 
-            msg.To.Add(new MailAddress("bsandovalmora@gmail.com"));
+            msg.To.Add(new MailAddress(correo));
             msg.From = new MailAddress("bsandovalmora@gmail.com");
-            msg.Subject = "Restauración de la contraseña Sitio Banco Seguridad";
-            msg.Body = "Estimado/a " + usuario +
-                "\n ¿Ha olvidado su contraseña?\n" +
-                "Se genero un codigo para su restauración  de contraseña\n" +
-                "Codigo: " + codigo +
-                "\nSi no desea cambiar su contraseña o no ha solicitado este cambio, obvie y elimine este mensaje.\n" +
-                "Gracias, \n" +
-                "El equipo de cuentas de Apollo\n";
+            msg.Subject = asunto;
+            msg.Body = cuerpo;
             msg.Priority = MailPriority.High;
 
             SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com");

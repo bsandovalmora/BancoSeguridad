@@ -95,7 +95,19 @@ namespace Banco.Controllers
             }
             else
             {
-                m.EnviarCorreo(usuario);
+                string codigo = m.GenerarCodigo();
+                string cuerpo = "Estimado/a " + usuario +
+                "\n ¿Ha olvidado su contraseña?\n" +
+                "Se genero un codigo para su restauración  de contraseña\n" +
+                "Codigo: " + codigo +
+                "\nSi no desea cambiar su contraseña o no ha solicitado este cambio, obvie y elimine este mensaje.\n" +
+                "Gracias, \n" +
+                "El equipo de cuentas de Apollo\n";                
+                string asunto = "Restauración de la contraseña Sitio Banco Seguridad";
+
+                m.InsertarCodigo(codigo, usuario);
+                m.EnviarCorreo(usuario, asunto, cuerpo);
+
                 return View();
             }       
 
@@ -149,6 +161,73 @@ namespace Banco.Controllers
         {
            
             return View();
+
+        }
+
+        public ActionResult Registro_Verificacion()
+        {
+            Metodos m = new Metodos();
+            string mjs = "";
+
+            string nombre = Request.Form["nombre"].ToString();
+            string apellidos = Request.Form["apellidos"].ToString();
+            string usuario = Request.Form["usuario"].ToString();
+            string cedula = Request.Form["cedula"].ToString();
+            string telefono = Request.Form["telefono"].ToString();
+            string direccion = Request.Form["direccion"].ToString();
+            string correo = Request.Form["correo"].ToString();
+            string pregunta = Request.Form["pregunta"].ToString();
+            string respuesta = Request.Form["respuesta"].ToString();
+            string pass = Request.Form["pass"].ToString();
+
+
+            //insertar
+            mjs = m.Registrar(nombre, apellidos, usuario, cedula, telefono, direccion, correo, pregunta, respuesta, pass);
+
+            
+            TempData["usuario"] = usuario;
+
+            if (mjs.Equals("Insertado"))
+            {
+                string codigo = m.GenerarCodigo();
+
+                string asunto = "Nueva cuenta - Banco - Cuentas Apollo";
+                string cuerpo = "Estimado/a " + usuario +
+                "\n Se ha creado la cuenta para su uso\n" +
+                "Se genero un código para la creación de la cuenta\n" +
+                "Codigo: " + codigo +
+                "\n Ingrese en codigo en su respectiva pagina y campo .\n" +
+                "Gracias, \n" +
+                "El equipo de cuentas de Apollo\n";
+
+                m.InsertarCodigo(codigo, usuario);
+                m.EnviarCorreo(usuario, asunto, cuerpo);
+
+                return View();
+            }
+            else
+            {
+                return View("~/Views/Home/Registro.cshtml");
+            }
+        }
+
+        public ActionResult Registro_completado()
+        {
+
+            Metodos m = new Metodos();
+            string codigo = Request.Form["codigo"].ToString();
+            string usuario = "";
+            string mjs = "";
+
+            if (TempData["usuario"] != null)
+                usuario = TempData["usuario"] as string;
+
+            //verificacion codigo
+            mjs = m.Codigo(usuario, codigo);
+            TempData.Keep();
+
+           
+            return View("~/Views/Home/Index.cshtml");
 
         }
 

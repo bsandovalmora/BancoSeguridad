@@ -13,12 +13,13 @@
     <title>Registro</title>
     <link rel="stylesheet" type="text/css" href="~/css/main.css">
     <link rel="stylesheet" type="text/css" href="~/css/registro.css">
+    <script src="~/Script/registro.js"></script>
 </head>
 <body>
     <div class="container">
         <hr />
         <div>
-            <form name="registro" method="post" action="/Home/Verificacion_codigo">
+            <form name="registro" method="post" action="/Home/Registro_Verificacion" onsubmit="return validar_pass()">
                 <fieldset>
                     <legend style="font-size:x-large; text-align:center;">Crear cuenta</legend>
 

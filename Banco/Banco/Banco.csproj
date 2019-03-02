@@ -87,6 +87,7 @@
     <Content Include="css\recuperar.css" />
     <Content Include="css\registro.css" />
     <Content Include="Global.asax" />
+    <Content Include="Script\registro.js" />
     <Content Include="Script\Validaciones.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -129,6 +130,8 @@
     <Content Include="Views\Home\Restaurada.cshtml" />
     <Content Include="Views\Home\NuevaContra.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
+    <Content Include="Views\Home\Registro_Verificacion.cshtml" />
+    <Content Include="Views\Home\Registro_completado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

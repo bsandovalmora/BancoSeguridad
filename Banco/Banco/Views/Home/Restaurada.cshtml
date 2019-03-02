@@ -13,12 +13,13 @@
     <title>Restaurada</title>
     <link rel="stylesheet" type="text/css" href="~/css/main.css">
     <link rel="stylesheet" type="text/css" href="~/css/recuperar.css">
+    <script src="~/Script/registro.js"></script>
 </head>
 <body>
     <div class="container">
         <hr />
         <div>
-            <form name="recuperar" method="post" action="/Home/NuevaContra">
+            <form name="recuperar" method="post" action="/Home/NuevaContra" onsubmit="return recuperar_pass()">
                 <fieldset>
                     <legend style="font-size:x-large;">Nueva contraseña</legend>
 
