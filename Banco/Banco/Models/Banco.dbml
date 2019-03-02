@@ -21,6 +21,7 @@
       <Column Name="usuario" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="pass" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
       <Association Name="credenciales_usuarioXcodigo" Member="usuarioXcodigo" ThisKey="id" OtherKey="id_usuario" Type="usuarioXcodigo" />
+      <Association Name="credenciales_estado" Member="estado" ThisKey="id" OtherKey="id_usuario" Type="estado" />
       <Association Name="cliente_credenciales" Member="cliente" ThisKey="id_cliente" OtherKey="id" Type="cliente" IsForeignKey="true" />
     </Type>
   </Table>
@@ -32,12 +33,14 @@
       <Association Name="credenciales_usuarioXcodigo" Member="credenciales" ThisKey="id_usuario" OtherKey="id" Type="credenciales" IsForeignKey="true" />
     </Type>
   </Table>
-  <Function Name="dbo.buscar_credencial" Method="buscar_credencial">
-    <Parameter Name="usu" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="pass" Type="System.String" DbType="VarChar(12)" />
-    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
+  <Table Name="dbo.estado" Member="estado">
+    <Type Name="estado">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_usuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="estado" Member="estado1" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Association Name="credenciales_estado" Member="credenciales" ThisKey="id_usuario" OtherKey="id" Type="credenciales" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.buscar_pregunta" Method="buscar_pregunta">
     <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
     <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
@@ -83,6 +86,29 @@
     <Parameter Name="pregunta" Type="System.String" DbType="VarChar(200)" />
     <Parameter Name="respuesta" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="pass" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.buscar_credencial" Method="buscar_credencial">
+    <Parameter Name="usu" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.cambiar_estado" Method="cambiar_estado">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="estado" Type="System.String" DbType="VarChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.verificar_cuenta" Method="verificar_cuenta">
+    <Parameter Name="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="cedula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="pregunta" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="respuesta" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="codigo" Type="System.String" DbType="VarChar(10)" />
     <Parameter Name="mjs" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>

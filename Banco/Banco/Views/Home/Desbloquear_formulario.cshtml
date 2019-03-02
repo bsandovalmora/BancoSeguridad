@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Desbloquear</title>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/registro.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div>
+            <form name="registro" method="post" action="/Home/Verificar_formulario">
+                <fieldset>
+                    <legend style="font-size:x-large; text-align:center;">Crear cuenta</legend>
+
+                    <div class="cuenta">
+                        <br />
+                        <input class="texto" type="text" name="nombre" required="required" maxlength="20" placeholder="Nombre" autocomplete="off" /><br />
+                        <input class="texto" type="text" name="apellidos" required="required" maxlength="25" placeholder="Apellidos" autocomplete="off" /><br />
+                        <input class="texto" type="text" name="usuario" required="required" maxlength="10" placeholder="Usuario" autocomplete="off" /><br />
+                        <input class="texto" type="number" name="cedula" required="required" maxlength="15" placeholder="Cedula" autocomplete="off" /><br />
+                        <input class="texto" type="email" name="correo" required="required" placeholder="E-mail" autocomplete="off" /><br />
+                        <label style="margin-left:21%;" for="pregunta">Seleccione una pregunta</label><br />
+                        <select style="margin-left:25%; width:auto; margin-bottom:2%;" name="pregunta" required="required">
+                            <option value="Si sólo pudieras tener un hobby, ¿cuál sería?">Si sólo pudieras tener un hobby, ¿cuál sería?</option>
+                            <option value="¿Cuál es tu palabra favorita?">¿Cuál es tu palabra favorita?</option>
+                            <option value="Si pudieras ser un animal, ¿cuál serías?">Si pudieras ser un animal, ¿cuál serías?</option>
+                            <option value="¿En qué lugar del mundo te gustaría vivir?">¿En qué lugar del mundo te gustaría vivir?</option>
+                            <option value="¿Cuál es tu número favorito?">¿Cuál es tu número favorito?</option>
+                        </select><br />
+                        <input autocomplete="off" class="texto" type="text" name="respuesta" required="required" placeholder="Respuesta" /><br /><br />
+                        <input autocomplete="off" class="texto" type="text" name="codigo" required="required" placeholder="Código de creación" /><br />
+
+                        <br />
+
+                        <input class="button" type="submit" value="Desbloquear" />
+                        <br />
+                        <hr />
+                    </div>
+
+                    <a style="margin:2%; margin-top:3%;" href="/Home/Index">Volver</a>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

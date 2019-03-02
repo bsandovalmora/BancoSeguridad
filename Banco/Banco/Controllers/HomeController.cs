@@ -12,6 +12,14 @@ namespace Banco.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            string cuenta = "a";
+            if (TempData["cuenta"] != null)
+                cuenta = TempData["cuenta"] as string;
+            else
+                TempData["cuenta"] = cuenta;
+
+            ViewBag.data = TempData["cuenta"].ToString();
+
             return View();
         }
 
@@ -25,10 +33,16 @@ namespace Banco.Controllers
             if(mjs.Equals("Usuario encontrado")){     
                 return View();
             }
+
+            if (mjs.Equals("Usuario no existe"))
+            {
+                TempData["cuenta"] = "no existe";
+                return RedirectToAction("Index");
+            }
             else
             {
-                ViewBag.showSuccessAlert = true;
-                return View("~/Views/Home/Index.cshtml");
+                TempData["cuenta"] = "bloqueado";
+                return RedirectToAction("Index");
             }
             
         }
@@ -130,7 +144,10 @@ namespace Banco.Controllers
 
             if (mjs.Equals("Incorrecta"))
             {
-                return View("~/Views/Home/Index.cshtml");
+                //cuenta bloqueada
+                TempData["cuenta"] = "bloqueada";
+                m.Cambiar_estado(usuario,"0");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -228,6 +245,42 @@ namespace Banco.Controllers
 
            
             return View("~/Views/Home/Index.cshtml");
+
+        }
+
+        public ActionResult Desbloquear_formulario()
+        {
+
+            return View();
+
+        }
+
+        public ActionResult Verificar_formulario()
+        {
+            Metodos m = new Metodos();
+            string mjs = "";
+
+            string nombre = Request.Form["nombre"].ToString();
+            string apellidos = Request.Form["apellidos"].ToString();
+            string usuario = Request.Form["usuario"].ToString();
+            string cedula = Request.Form["cedula"].ToString();
+            string correo = Request.Form["correo"].ToString();
+            string pregunta = Request.Form["pregunta"].ToString();
+            string respuesta = Request.Form["respuesta"].ToString();
+            string codigo = Request.Form["codigo"].ToString();
+
+            mjs = m.Verificar_cuenta(nombre, apellidos, usuario, cedula, correo, pregunta, respuesta, codigo);
+
+            if (mjs.Equals("desbloqueada"))
+            {
+                TempData["cuenta"] = "desbloqueada";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["cuenta"] = "no coincide";
+                return RedirectToAction("Index");
+            }
 
         }
 

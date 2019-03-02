@@ -13,32 +13,35 @@
     <title>Inicio sesión</title>
     <link rel="stylesheet" type="text/css" href="~/css/main.css">
     <script src="~/Script/Validaciones.js"></script>
+   
 </head>
 <body>
-    <div>
-        
-            <div class="container">
-                <h1>Inicio de sesión</h1>
-                <hr>
-                <div class="cuadro">
-                    <h3>Acceder</h3>
-                    <form name="inicio" method="post" action="/Home/Verificacion" onsubmit="return validateForm()">
-                        <label style="margin-left:20%;" for="usuario">Usuario</label>
-                        <input type="text" name="usuario" maxlength="10" required="required" autocomplete="off"/>
-                        <br />
-                        <br />
-                        <label style="margin-left:15%;" for="pass">Contraseña</label>
-                        <input type="password" name="pass" maxlength="12" required="required" autocomplete="off"/>
-                        <hr>
-                        <input type="submit" value="Ingresar" style="margin-left:40%;" />
-                        <hr>
-                    </form>
-                    <a style="margin:5%;" href="/Home/Recuperar">¿Olvidaste la contraseña?</a>
-                    <a style="margin:13%;" href="/Home/Registro">Crear cuenta</a>
-                </div>
-                <a style="margin-left:34%; margin-top:3%;" href="">Ayuda</a>
+  
+        <div class="container">
+            <h1>Inicio de sesión</h1>
+            <hr>
+            <div class="cuadro">
+                <h3>Acceder</h3>
+                <form name="inicio" method="post" action="/Home/Verificacion" onsubmit="return validateForm()">
+                    <label style="margin-left:20%;" for="usuario">Usuario</label>
+                    <input class="texto" type="text" name="usuario" maxlength="10" required="required" autocomplete="off" />
+                    <br />
+                    <br />
+                    <label style="margin-left:15%;" for="pass">Contraseña</label>
+                    <input class="texto" type="password" name="pass" maxlength="12" required="required" autocomplete="off" />
+                    <hr>
+                    <input class="texto" type="submit" value="Ingresar" style="margin-left:40%;" />
+                    <hr>
+                    <input style="display:none;" type="text" name="c" value="@ViewBag.data" />
+                    <script>
+                        cuenta();
+                    </script>
+                </form>
+                <a style="margin:5%;" href="/Home/Recuperar">¿Olvidaste la contraseña?</a>
+                <a style="margin:13%;" href="/Home/Registro">Crear cuenta</a>
             </div>
-        
-    </div>
+            <a style="margin:35%;" href="/Home/Desbloquear_formulario">¿Desbloquear cuenta?</a>
+        </div>
+
 </body>
 </html>

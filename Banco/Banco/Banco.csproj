@@ -132,6 +132,8 @@
     <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Home\Registro_Verificacion.cshtml" />
     <Content Include="Views\Home\Registro_completado.cshtml" />
+    <Content Include="Views\Home\Desbloquear_formulario.cshtml" />
+    <Content Include="Views\Home\Verificar_formulario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

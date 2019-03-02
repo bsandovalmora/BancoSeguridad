@@ -39,6 +39,9 @@ namespace Banco.Models
     partial void InsertusuarioXcodigo(usuarioXcodigo instance);
     partial void UpdateusuarioXcodigo(usuarioXcodigo instance);
     partial void DeleteusuarioXcodigo(usuarioXcodigo instance);
+    partial void Insertestado(estado instance);
+    partial void Updateestado(estado instance);
+    partial void Deleteestado(estado instance);
     #endregion
 		
 		public BancoDataContext() : 
@@ -95,12 +98,12 @@ namespace Banco.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.buscar_credencial")]
-		public int buscar_credencial([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string usu, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string pass, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] ref string mjs)
+		public System.Data.Linq.Table<estado> estado
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), usu, pass, mjs);
-			mjs = ((string)(result.GetParameterValue(2)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<estado>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.buscar_pregunta")]
@@ -156,6 +159,29 @@ namespace Banco.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, apellidos, usuario, cedula, telefono, direccion, correo, pregunta, respuesta, pass, mjs);
 			mjs = ((string)(result.GetParameterValue(10)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.buscar_credencial")]
+		public int buscar_credencial([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string usu, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string pass, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] ref string mjs)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), usu, pass, mjs);
+			mjs = ((string)(result.GetParameterValue(2)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cambiar_estado")]
+		public int cambiar_estado([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string usuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string estado)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), usuario, estado);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.verificar_cuenta")]
+		public int verificar_cuenta([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string usuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cedula, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string pregunta, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string respuesta, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] ref string mjs)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, apellidos, usuario, cedula, correo, pregunta, respuesta, codigo, mjs);
+			mjs = ((string)(result.GetParameterValue(8)));
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -458,6 +484,8 @@ namespace Banco.Models
 		
 		private EntitySet<usuarioXcodigo> _usuarioXcodigo;
 		
+		private EntitySet<estado> _estado;
+		
 		private EntityRef<cliente> _cliente;
 		
     #region Definiciones de métodos de extensibilidad
@@ -477,6 +505,7 @@ namespace Banco.Models
 		public credenciales()
 		{
 			this._usuarioXcodigo = new EntitySet<usuarioXcodigo>(new Action<usuarioXcodigo>(this.attach_usuarioXcodigo), new Action<usuarioXcodigo>(this.detach_usuarioXcodigo));
+			this._estado = new EntitySet<estado>(new Action<estado>(this.attach_estado), new Action<estado>(this.detach_estado));
 			this._cliente = default(EntityRef<cliente>);
 			OnCreated();
 		}
@@ -578,6 +607,19 @@ namespace Banco.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="credenciales_estado", Storage="_estado", ThisKey="id", OtherKey="id_usuario")]
+		public EntitySet<estado> estado
+		{
+			get
+			{
+				return this._estado;
+			}
+			set
+			{
+				this._estado.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cliente_credenciales", Storage="_cliente", ThisKey="id_cliente", OtherKey="id", IsForeignKey=true)]
 		public cliente cliente
 		{
@@ -639,6 +681,18 @@ namespace Banco.Models
 		}
 		
 		private void detach_usuarioXcodigo(usuarioXcodigo entity)
+		{
+			this.SendPropertyChanging();
+			entity.credenciales = null;
+		}
+		
+		private void attach_estado(estado entity)
+		{
+			this.SendPropertyChanging();
+			entity.credenciales = this;
+		}
+		
+		private void detach_estado(estado entity)
 		{
 			this.SendPropertyChanging();
 			entity.credenciales = null;
@@ -764,6 +818,157 @@ namespace Banco.Models
 					if ((value != null))
 					{
 						value.usuarioXcodigo.Add(this);
+						this._id_usuario = value.id;
+					}
+					else
+					{
+						this._id_usuario = default(int);
+					}
+					this.SendPropertyChanged("credenciales");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.estado")]
+	public partial class estado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _id_usuario;
+		
+		private string _estado1;
+		
+		private EntityRef<credenciales> _credenciales;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onid_usuarioChanging(int value);
+    partial void Onid_usuarioChanged();
+    partial void Onestado1Changing(string value);
+    partial void Onestado1Changed();
+    #endregion
+		
+		public estado()
+		{
+			this._credenciales = default(EntityRef<credenciales>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_usuario", DbType="Int NOT NULL")]
+		public int id_usuario
+		{
+			get
+			{
+				return this._id_usuario;
+			}
+			set
+			{
+				if ((this._id_usuario != value))
+				{
+					if (this._credenciales.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_usuarioChanging(value);
+					this.SendPropertyChanging();
+					this._id_usuario = value;
+					this.SendPropertyChanged("id_usuario");
+					this.Onid_usuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="estado", Storage="_estado1", DbType="VarChar(5)")]
+		public string estado1
+		{
+			get
+			{
+				return this._estado1;
+			}
+			set
+			{
+				if ((this._estado1 != value))
+				{
+					this.Onestado1Changing(value);
+					this.SendPropertyChanging();
+					this._estado1 = value;
+					this.SendPropertyChanged("estado1");
+					this.Onestado1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="credenciales_estado", Storage="_credenciales", ThisKey="id_usuario", OtherKey="id", IsForeignKey=true)]
+		public credenciales credenciales
+		{
+			get
+			{
+				return this._credenciales.Entity;
+			}
+			set
+			{
+				credenciales previousValue = this._credenciales.Entity;
+				if (((previousValue != value) 
+							|| (this._credenciales.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._credenciales.Entity = null;
+						previousValue.estado.Remove(this);
+					}
+					this._credenciales.Entity = value;
+					if ((value != null))
+					{
+						value.estado.Add(this);
 						this._id_usuario = value.id;
 					}
 					else

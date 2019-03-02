@@ -45,6 +45,36 @@ namespace Banco.Models
             return pregunta;
         }
 
+        public string Verificar_cuenta(string nombre, string apellidos, string usuario, string cedula, string correo, string pregunta, string respuesta,string codigo)
+        {
+            string mjs = "";
+
+            try
+            {
+                b.verificar_cuenta(nombre, apellidos, usuario, Convert.ToInt32(cedula), correo, pregunta, respuesta, codigo, ref mjs);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            return mjs;
+        }
+
+        public void Cambiar_estado(string usuario, string estado)
+        {
+
+            try
+            {
+                b.cambiar_estado(usuario, estado);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
         public string Respuesta(string usuario, string respuesta)
         {
             string mjs = "";

@@ -8,6 +8,7 @@
     margin-left:33%;
     margin-top: 10%;
     padding:2%;
+    border-radius:25px;
 }
 
 .cuadro input, label, h3, p,h2{
@@ -16,6 +17,10 @@
 }
 h1{
     text-align:center;
+}
+
+.texto{
+    border-radius:25px;
 }
 
 
